@@ -1,5 +1,5 @@
 import axios from "axios"
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 
 export const noteCRUD = {
     methods: {
@@ -9,7 +9,8 @@ export const noteCRUD = {
                 axios  
                     .post("https://lola-notes-server.herokuapp.com/notes", newNote)
                     .then(res => (this.notes.push(res.data)))
-                    .catch(err => (this.message = err))
+                    .catch(err => (err))
+                    .then(() => this.$root.$emit("reloadResources"))
                 this.title = ""
                 this.content = ""
             } else {
@@ -21,6 +22,7 @@ export const noteCRUD = {
                 .put(`https://lola-notes-server.herokuapp.com/notes/${id}`, changes)
                 .then(res => (this.notes = this.notes.map(note => note.id === id ? res.data : note)))
                 .catch(err => (this.message = err))
+                .then(() => this.$root.$emit("reloadResources"))
             this.editTitle = ""
             this.editContent = ""
             this.editId = 0
@@ -30,6 +32,7 @@ export const noteCRUD = {
                 .delete(`https://lola-notes-server.herokuapp.com/notes/${id}`)
                 .then(res => (this.notes = res.data))
                 .catch(err => (this.message = err))
+                .then(() => this.$root.$emit("reloadResources"))
                 .then(this.$router.push("/notes"))
         }
     }

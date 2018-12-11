@@ -54,12 +54,13 @@
                 .get("https://lola-notes-server.herokuapp.com/notes")
                 .then(res => (this.notes = res.data))
                 .catch(err => (this.message = err))
-        },
-        updated() {
-            axios
-                .get("https://lola-notes-server.herokuapp.com/notes")
-                .then(res => (this.notes = res.data))
-                .catch(err => (this.message = err))
+           
+            this.$root.$on("reloadResources", () => {
+                axios
+                    .get(`https://lola-notes-server.herokuapp.com/notes/`)
+                    .then(res => (this.notes = res.data))
+                    .catch(err => (alert(err)))
+            })
         }
     }
 </script>

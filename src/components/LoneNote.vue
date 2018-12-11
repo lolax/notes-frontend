@@ -28,13 +28,12 @@
                 .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
                 .then(res => (this.note = res.data))
                 .catch(err => (alert(err)))
-        },
-        updated() {
-            const id = this.$route.params.id
-            axios
-                .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
-                .then(res => (this.note = res.data))
-                .catch(err => (alert(err)))
+            this.$root.$on("reloadResources", () => {
+                axios
+                    .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
+                    .then(res => (this.note = res.data))
+                    .catch(err => (alert(err)))
+            })
         }
     }
 </script>

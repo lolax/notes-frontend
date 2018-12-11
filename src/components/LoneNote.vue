@@ -25,14 +25,14 @@
         mounted() {
             const id = this.$route.params.id
             axios
-                .get(`http://localhost:3300/notes/${id}/`)
+                .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
                 .then(res => (this.note = res.data))
                 .catch(err => (alert(err)))
         },
         updated() {
             const id = this.$route.params.id
             axios
-                .get(`http://localhost:3300/notes/${id}/`)
+                .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
                 .then(res => (this.note = res.data))
                 .catch(err => (alert(err)))
         }

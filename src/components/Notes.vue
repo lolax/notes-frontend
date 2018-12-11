@@ -36,7 +36,7 @@
     import axios from "axios"
     import { noteCRUD } from '../mixins.js'
 
-    axios.defaults.withCredentials = true
+    // axios.defaults.withCredentials = true
     export default {
         name:"notes",
         components: { Note },
@@ -51,13 +51,13 @@
         },
         mounted() {
             axios
-                .get("http://localhost:3300/notes")
+                .get("https://lola-notes-server.herokuapp.com/notes")
                 .then(res => (this.notes = res.data))
                 .catch(err => (this.message = err))
         },
         updated() {
             axios
-                .get("http://localhost:3300/notes")
+                .get("https://lola-notes-server.herokuapp.com/notes")
                 .then(res => (this.notes = res.data))
                 .catch(err => (this.message = err))
         }

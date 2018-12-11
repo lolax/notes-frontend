@@ -3,26 +3,26 @@
         <router-link :to="`/notes/${note.id}`">
             <h3 class="title">{{note.title}}</h3>
             <p class="content">{{note.content}}</p>
-            <div class="buttons">
-                <div class="btn" @click="startEdit(note.id)">Edit</div>
-                <div class="btn" @click="$emit('delete', note.id)">Delete</div>
-            </div>
-            <div v-bind:class="[editId === note.id ? 'active' : 'hidden']">
-                <input 
-                    class="input" 
-                    type="text"
-                    v-model="editTitle" 
-                    v-on:keyup.enter="submitEdit(note.id)"
-                />
-                <input 
-                    class="input" 
-                    type="text" 
-                    v-model="editContent" 
-                    v-on:keyup.enter="submitEdit(note.id)"
-                />
-                <div id="submit" class="btn" @click="submitEdit(note.id)">Submit</div>
-            </div>
         </router-link>  
+        <div class="buttons">
+            <div class="btn" @click="startEdit(note.id)">Edit</div>
+            <div class="btn" @click="$emit('delete', note.id)">Delete</div>
+        </div>
+        <div v-bind:class="[editId === note.id ? 'active' : 'hidden']">
+            <input 
+                class="input" 
+                type="text"
+                v-model="editTitle" 
+                v-on:keyup.enter="submitEdit(note.id)"
+            />
+            <input 
+                class="input" 
+                type="text" 
+                v-model="editContent" 
+                v-on:keyup.enter="submitEdit(note.id)"
+            />
+            <div id="submit" class="btn" @click="submitEdit(note.id)">Submit</div>
+        </div>
     </div>
 </template>
 

@@ -18,6 +18,7 @@
             <div id="submit" class="btn" @click="addNote">Submit</div>
         </form>
         <div class="message">{{message}}</div>
+        <hr>
         <h2>Notes</h2>
         <input
             class="search"
@@ -62,14 +63,14 @@
             axios
                 .get("https://lola-notes-server.herokuapp.com/notes")
                 .then(res => (this.allNotes = res.data))
-                .catch(err => (this.message = err))
+                .catch(err => (this.message = "Notes could not be retrieved"))
                 .then(() => this.filteredNotes = this.allNotes)
 
             this.$root.$on("reloadResources", () => {
                 axios
                     .get("https://lola-notes-server.herokuapp.com/notes/")
                     .then(res => (this.allNotes = res.data))
-                    .catch(err => (this.message = err))
+                    .catch(err => (this.message = "Notes could not be refreshed"))
                     .then(() => this.filteredNotes = this.allNotes)
 
             })
@@ -86,13 +87,13 @@
                     const newNote = { title: this.title, content: this.content }
                     axios  
                         .post("https://lola-notes-server.herokuapp.com/notes", newNote)
-                        .then(res => (this.message = "Note added."))
-                        .catch(err => (this.message = err))
+                        .then(res => (this.message = "Note added"))
+                        .catch(err => (this.message= "Note failed to add"))
                         .then(() => this.$root.$emit("reloadResources"))
                     this.title = ""
                     this.content = ""
                 } else {
-                    this.message = "Please enter note title & content."
+                    this.message = "Please enter note title & content"
                 }
             },
         }
@@ -106,7 +107,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 20px auto;
+        margin: 170px auto 20px;
         padding: 15px;
     }
     .input {
@@ -130,6 +131,8 @@
         cursor: pointer;
         padding: 5px;
         width: 70px;
+        -webkit-user-select: none;
+        -moz-user-select: none; 
     }
     .btn:hover {
         background: black;
@@ -138,10 +141,22 @@
     #submit {
         width: 40%;
         margin: 10px;
+        -webkit-user-select: none;
+        -moz-user-select: none; 
+    }
+    .message {
+        height: 20px;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    hr {
+        margin: 10px auto;
+        width: 80%;
     }
     .notes {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        margin-top: 20px;
     }
 </style>

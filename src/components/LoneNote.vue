@@ -30,12 +30,12 @@
             axios
                 .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
                 .then(res => (this.note = res.data))
-                .catch(err => (this.message = err))
+                .catch(err => (this.message = "Note could not be retrieved"))
             this.$root.$on("reloadResources", () => {
                 axios
                     .get(`https://lola-notes-server.herokuapp.com/notes/${id}/`)
                     .then(res => (this.note = res.data))
-                    .catch(err => (this.message = err))
+                    .catch(err => (this.message = "Note could not be refreshed"))
             })
         }
     }
@@ -43,9 +43,18 @@
 
 <style>
     .lone-note {
+        margin-top: 170px;
         width: 100%;
         display: flex;
+        flex-direction: column;
         padding-top: 30px;
-        justify-content: center;
+        align-items: center;
+        word-wrap: normal;
+
+    }
+    .message {
+        margin-top: 20px;
+        height: 20px;
+        font-size: 18px;
     }
 </style>

@@ -6,8 +6,8 @@
         </router-link>  
         <div class="buttons">
             <div class="btn" @click="startEdit(note.id)">Edit</div>
-            <div class="btn" @click="$emit('delete', note.id)">Delete</div>
             <div class="btn" @click="$emit('clone', note.title, note.content)">Clone</div>
+            <div class="btn" @click="$emit('delete', note.id)">Delete</div>
         </div>
         <div v-bind:class="[editId === note.id ? 'active' : 'hidden']">
             <input 
@@ -72,18 +72,23 @@
    .note {
         width: 30%;
         border: 1px solid black;
-        padding: 10px 10px 20px;
+        padding: 0 0 20px;
         margin: 10px;
     }
     .title {
         text-decoration: none;
         color: black;
-        padding-bottom: 5px;
+        padding: 0 10px 10px;
         border-bottom: 4px double black;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .content {
+        padding: 10px;
         text-decoration: none;
         color: black;
+        word-wrap: break-word;
     }
     .active {
         display: flex;

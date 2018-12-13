@@ -1,8 +1,10 @@
 <template>
   <div id="main">
-    <div id="nav">
-      <router-link to="/notes" exact>Notes</router-link>
-    </div>
+  <div class="nav">
+    <router-link class="link" to="/notes" exact>Notes</router-link>
+    <router-link class="link" to="/register">Register</router-link>
+    <router-link class="link" to="/login">Login</router-link>
+  </div>
     <router-view></router-view>
   </div>
 </template>
@@ -20,15 +22,38 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    width: 100%;
+    margin: 0;
   }
 
-  a {
+  .nav {
+    width: 100%;
+    margin: 0;
+    padding: 40px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    background-color: lavender;
+  }
+
+  .link {
+    margin: 0 20px;
+    border: 1px solid lavender;
     text-decoration: none;
     color: black;
-    border: 1px solid black;
-    background: lavender;
-    padding: 10px;
+    background: white;
+    padding: 10px 15px;
+    outline: 0;
+    outline-offset: 0;
+    transition: 500ms;
   }
 
+  .link:hover {
+    border: 1px solid black;
+    outline: 1px solid black;
+    outline-offset: 5px;
+    transition: 500ms;
+  }
 </style>

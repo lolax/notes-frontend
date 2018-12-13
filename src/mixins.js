@@ -1,22 +1,7 @@
 import axios from "axios"
-// axios.defaults.withCredentials = true
 
 export const noteCRUD = {
     methods: {
-        addNote() {
-            if (this.title && this.content) {
-                const newNote = { title: this.title, content: this.content }
-                axios  
-                    .post("https://lola-notes-server.herokuapp.com/notes", newNote)
-                    .then(res => (this.notes.push(res.data)))
-                    .catch(err => (err))
-                    .then(() => this.$root.$emit("reloadResources"))
-                this.title = ""
-                this.content = ""
-            } else {
-                this.message = "Please enter note title & content."
-            }
-        },
         editNote(id, changes) {  
             axios
                 .put(`https://lola-notes-server.herokuapp.com/notes/${id}`, changes)

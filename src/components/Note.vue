@@ -59,13 +59,36 @@
     }
 </script>
 
-<style>
+<style scoped>
+    a {
+        text-decoration: none;
+        color: black;
+        border: 0;
+        background: white;
+        padding: 0;
+    }
+
+   .note {
+        width: 30%;
+        border: 1px solid black;
+        padding: 10px 10px 20px;
+        margin: 10px;
+    }
+    .title {
+        text-decoration: none;
+        color: black;
+        padding-bottom: 5px;
+        border-bottom: 4px double black;
+    }
+    .content {
+        text-decoration: none;
+        color: black;
+    }
     .active {
         display: flex;
         flex-direction: column;
         margin: 10px;
         align-items: center;
-
     }
     .hidden {
         display: none;

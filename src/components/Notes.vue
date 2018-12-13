@@ -15,13 +15,20 @@
                 v-on:keyup.enter="addNote"
                 placeholder="Content"
             />
-            <div id="submit" class="btn" @click="addNote()">Submit</div>
+            <div id="submit" class="btn" @click="addNote">Submit</div>
         </form>
         <div class="message">{{message}}</div>
         <h2>Notes</h2>
+        <input
+            class="search"
+            type="text"
+            v-model="search"
+            @input="filterNotes"
+            placeholder="Search Notes"
+        />
         <section class="notes">
             <Note 
-                v-for="note in notes" 
+                v-for="note in filteredNotes" 
                 :key="note.id" 
                 :note="note"
                 @edit="editNote"
@@ -36,31 +43,56 @@
     import axios from "axios"
     import { noteCRUD } from '../mixins.js'
 
-    // axios.defaults.withCredentials = true
     export default {
         name:"notes",
         components: { Note },
         mixins: [noteCRUD],
         data() {
             return {
-                notes: [],
+                allNotes: [],
+                filteredNotes: [],
                 title: "",
                 content: "",
+                search: "",
                 message: ""
             }
         },
         mounted() {
             axios
                 .get("https://lola-notes-server.herokuapp.com/notes")
-                .then(res => (this.notes = res.data))
+                .then(res => (this.allNotes = res.data))
+                .then(() => this.filteredNotes = this.allNotes)
                 .catch(err => (this.message = err))
-           
+
             this.$root.$on("reloadResources", () => {
                 axios
-                    .get(`https://lola-notes-server.herokuapp.com/notes/`)
-                    .then(res => (this.notes = res.data))
-                    .catch(err => (alert(err)))
+                    .get("https://lola-notes-server.herokuapp.com/notes/")
+                    .then(res => (this.allNotes = res.data))
+                    .catch(err => (this.message = err))
+                this.filterNotes()
             })
+        },
+        methods: {
+            filterNotes() {
+                let lowerCaseSearch = this.search.toLowerCase();
+                this.filteredNotes = this.allNotes.filter(note => {
+                    return (note.title.toLowerCase().includes(lowerCaseSearch) || note.content.toLowerCase().includes(lowerCaseSearch))
+                })
+            },
+            addNote() {
+                if (this.title && this.content) {
+                    const newNote = { title: this.title, content: this.content }
+                    axios  
+                        .post("https://lola-notes-server.herokuapp.com/notes", newNote)
+                        .then(res => (this.message = "Note added."))
+                        .then(() => this.$root.$emit("reloadResources"))
+                        .catch(err => (this.message = err))
+                    this.title = ""
+                    this.content = ""
+                } else {
+                    this.message = "Please enter note title & content."
+                }
+            },
         }
     }
 </script>
@@ -79,6 +111,12 @@
         width: 80%;
         margin: 5px;
         padding: 10px;
+    }
+    .search {
+        width: 30%;
+        margin: 15px;
+        padding: 10px;
+        font-size: 18px;
     }
     .buttons {
         display: flex;
@@ -103,24 +141,5 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-    }
-    .note {
-        width: 200px;
-        border: 1px solid black;
-        padding: 10px 10px 20px;
-        margin: 10px;
-    }
-    .title {
-        padding-bottom: 5px;
-        border-bottom: 4px double black;
-    }
-    .active {
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-        align-items: center;
-    }
-    .hidden {
-        display: none;
     }
 </style>

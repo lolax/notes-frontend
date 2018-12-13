@@ -39,5 +39,10 @@
 </script>
 
 <style>
-
+    .lone-note {
+        width: 100%;
+        display: flex;
+        padding-top: 30px;
+        justify-content: center;
+    }
 </style>

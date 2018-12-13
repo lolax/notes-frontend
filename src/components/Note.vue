@@ -7,6 +7,7 @@
         <div class="buttons">
             <div class="btn" @click="startEdit(note.id)">Edit</div>
             <div class="btn" @click="$emit('delete', note.id)">Delete</div>
+            <div class="btn" @click="$emit('clone', note.title, note.content)">Clone</div>
         </div>
         <div v-bind:class="[editId === note.id ? 'active' : 'hidden']">
             <input 

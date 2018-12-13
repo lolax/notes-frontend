@@ -33,6 +33,7 @@
                 :note="note"
                 @edit="editNote"
                 @delete="deleteNote"
+                @clone="cloneNote"
             />
         </section>
     </div>
@@ -41,12 +42,12 @@
 <script>
     import Note from './Note.vue'
     import axios from "axios"
-    import { noteCRUD } from '../mixins.js'
+    import { global } from '../mixins.js'
 
     export default {
         name:"notes",
         components: { Note },
-        mixins: [noteCRUD],
+        mixins: [global],
         data() {
             return {
                 allNotes: [],
@@ -61,15 +62,16 @@
             axios
                 .get("https://lola-notes-server.herokuapp.com/notes")
                 .then(res => (this.allNotes = res.data))
-                .then(() => this.filteredNotes = this.allNotes)
                 .catch(err => (this.message = err))
+                .then(() => this.filteredNotes = this.allNotes)
 
             this.$root.$on("reloadResources", () => {
                 axios
                     .get("https://lola-notes-server.herokuapp.com/notes/")
                     .then(res => (this.allNotes = res.data))
                     .catch(err => (this.message = err))
-                this.filterNotes()
+                    .then(() => this.filteredNotes = this.allNotes)
+
             })
         },
         methods: {
@@ -85,8 +87,8 @@
                     axios  
                         .post("https://lola-notes-server.herokuapp.com/notes", newNote)
                         .then(res => (this.message = "Note added."))
-                        .then(() => this.$root.$emit("reloadResources"))
                         .catch(err => (this.message = err))
+                        .then(() => this.$root.$emit("reloadResources"))
                     this.title = ""
                     this.content = ""
                 } else {

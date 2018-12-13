@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const noteCRUD = {
+export const global = {
     methods: {
         editNote(id, changes) {  
             axios
@@ -19,6 +19,15 @@ export const noteCRUD = {
                 .catch(err => (this.message = err))
                 .then(() => this.$root.$emit("reloadResources"))
                 .then(this.$router.push("/notes"))
+        },
+        cloneNote(title, content) {
+            const clone = { title, content }
+            axios  
+                .post("https://lola-notes-server.herokuapp.com/notes", clone)
+                .then(res => (this.message = "Note cloned"))
+                .catch(err => (this.message = err))
+                .then(() => this.$root.$emit("reloadResources"))
+
         }
     }
 }

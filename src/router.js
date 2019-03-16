@@ -1,8 +1,8 @@
 import VueRouter from 'vue-router'
+import New from './components/New'
 import Notes from './components/Notes'
 import LoneNote from './components/LoneNote'
-import Register from './components/Register'
-import Login from './components/Login'
+import Enter from './components/Enter'
 
 export default new VueRouter({
   routes: [
@@ -17,14 +17,14 @@ export default new VueRouter({
       component: LoneNote
     },
     {
-      path: '/register',
-      name: 'register',
-      component: Register
+      path: '/new',
+      name: 'new',
+      component: New,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/',
+      name: 'enter',
+      component: Enter
     }
   ]
 })

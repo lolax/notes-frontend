@@ -4,38 +4,67 @@
         <input
             class="input"
             type="text"
-            v-model="username"
+            v-model="email"
             v-on:keyup.enter="register"
-            placeholder="Username"
+            placeholder="email"
         />
         <input
             class="input"
-            type="text"
+            type="password"
             v-model="password"
             v-on:keyup.enter="register"
-            placeholder="Password"
+            placeholder="password"
         />
-        <div class="submit" @click="register">submit</div>
-        <div>{{this.message}}</div>
+        <div class="btn-container">
+            <div class="submit" @click="register">register</div>
+            <div class="submit" @click="login">login</div>
+        </div>
+        <div class="message">{{this.message}}</div>
     </div>
 </template>
 
 <script>
+    import firebase from 'firebase'
+    require('firebase/auth')
+
     export default {
         name: 'register',
         data() {
             return {
-                username: "",
+                email: "",
                 password: "",
                 message: ""
             }
         },
         methods: {
-            register() {
-                return this.username && this.password ? this.$router.push("/login") : this.message = "Please enter a username & password"
-            },
             login() {
-                return this.username && this.password ? this.$router.push("/notes") : this.message = "Please enter a username & password"
+                if (this.email && this.password) {
+                    firebase
+                        .auth()
+                        .signInWithEmailAndPassword(this.email, this.password)
+                        .then(
+                            () => this.$router.push("/notes"),
+                            (err) => this.message = err.message
+                        )
+                } else {
+                    this.message = "Please enter a email & password"
+                }
+            },
+            register() {
+                if (this.email && this.password) {
+                    firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(this.email, this.password)
+                        .then(
+                            () => {
+                                this.message = "Account successfully created"
+                                this.login()
+                            },
+                            (err) => this.message = err.message
+                        )
+                } else {
+                    this.message = "Please enter a email & password"
+                }
             }
         }
     }
@@ -43,14 +72,14 @@
 
 <style scoped>
     .register {
-        width: 40%;
+        width: 50%;
         margin: 250px auto 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         border: 4px double #e9bed3;
         padding: 30px;
-        height: 280px;
+        height: auto;
     }
     
     h1 {
@@ -78,8 +107,38 @@
         background: black;
         color: white;
     }
+    .btn-container {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
     .message {
         font-size: 18px;
-        padding: 10px;
+    }
+    @media (max-width: 800px) {
+        .btn-container {
+            flex-direction: column;
+        }
+        .submit {
+            margin: 10px;
+            width: 50%;
+        }
+    }
+    @media (max-width: 400px) {
+        .register {
+            border: 0;
+            width: 100%;
+            padding: 1px;
+        }
+        .btn-container {
+            flex-direction: column;
+        }
+        .submit {
+            margin: 10px;
+            width: 50%;
+        }
     }
 </style>

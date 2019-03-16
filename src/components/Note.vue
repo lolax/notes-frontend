@@ -5,9 +5,9 @@
             <p class="content">{{note.content}}</p>
         </router-link>  
         <div class="buttons">
-            <div class="btn" @click="startEdit(note.id)">Edit</div>
-            <div class="btn" @click="$emit('clone', note.title, note.content)">Clone</div>
-            <div class="btn" @click="$emit('delete', note.id)">Delete</div>
+            <div class="btn" @click="startEdit(note.id)">edit</div>
+            <div class="btn" @click="$emit('clone', note.title, note.content)">clone</div>
+            <div class="btn" @click="$emit('delete', note.id)">delete</div>
         </div>
         <div v-bind:class="[editId === note.id ? 'active' : 'hidden']">
             <input 
@@ -22,7 +22,7 @@
                 v-model="editContent" 
                 v-on:keyup.enter="submitEdit(note.id)"
             />
-            <div id="submit" class="btn" @click="submitEdit(note.id)">Submit</div>
+            <div id="edit-submit" class="btn" @click="submitEdit(note.id)">submit</div>
         </div>
     </div>
 </template>
@@ -68,11 +68,10 @@
         background: white;
         padding: 0;
     }
-
-   .note {
+    .note {
         width: 30%;
         border: 1px solid black;
-        padding: 0 0 20px;
+        padding-bottom: 20px;
         margin: 10px;
     }
     .title {

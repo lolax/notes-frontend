@@ -3,15 +3,29 @@
   <div class="nav">
     <router-link class="link" to="/notes" exact>notes</router-link>
     <router-link class="link" to="/new" exact>new</router-link>
-    <div class="link">logout</div>
+    <div class="link" @click="logout()">logout</div>
   </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import firebase from 'firebase/app'
+
   export default {
-    name: "app"
+    name: "app",
+    methods: {
+      
+      logout() {
+        firebase
+          .auth()
+          .signOut()
+          .then(
+            () => this.$router.push("/"),
+            () => alert(err.message)
+          )
+      },
+    }
   }
 </script>
 

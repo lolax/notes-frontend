@@ -1,8 +1,8 @@
 import VueRouter from 'vue-router'
-import Notes from '@/components/Notes'
-import LoneNote from '@/components/LoneNote'
-import Register from '@/components/Register'
-import Login from '@/components/Login'
+import Notes from './components/Notes'
+import LoneNote from './components/LoneNote'
+import Register from './components/Register'
+import Login from './components/Login'
 
 export default new VueRouter({
   routes: [

@@ -126,4 +126,14 @@
         justify-content: center;
         margin-top: 20px;
     }
+    @media (max-width: 900px) {
+        .buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn {
+            width: 80%;
+            margin: 10px;
+        }
+    }
 </style>

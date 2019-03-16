@@ -70,6 +70,7 @@
     }
     .note {
         width: 30%;
+        min-width: 250px;
         border: 1px solid black;
         padding-bottom: 20px;
         margin: 10px;
@@ -98,4 +99,5 @@
     .hidden {
         display: none;
     }
+    
 </style>

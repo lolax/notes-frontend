@@ -10,7 +10,8 @@
 </template>
 
 <script>
-  import firebase from 'firebase/app'
+  import firebase from 'firebase'
+  require('firebase/auth')
 
   export default {
     name: "app",

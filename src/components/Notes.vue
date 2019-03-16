@@ -1,31 +1,12 @@
 <template>
     <div class="notes-component">
-        <form class="form">New Note
-            <input 
-                class="input" 
-                type="text"
-                v-model="title" 
-                v-on:keyup.enter="addNote"
-                placeholder="Title"
-            />
-            <input 
-                class="input" 
-                type="text" 
-                v-model="content" 
-                v-on:keyup.enter="addNote"
-                placeholder="Content"
-            />
-            <div id="submit" class="btn" @click="addNote">Submit</div>
-        </form>
         <div class="message">{{message}}</div>
-        <hr>
-        <h2>Notes</h2>
         <input
             class="search"
             type="text"
             v-model="search"
             @input="filterNotes"
-            placeholder="Search Notes"
+            placeholder="search notes"
         />
         <section class="notes">
             <Note 
@@ -81,21 +62,7 @@
                 this.filteredNotes = this.allNotes.filter(note => {
                     return (note.title.toLowerCase().includes(lowerCaseSearch) || note.content.toLowerCase().includes(lowerCaseSearch))
                 })
-            },
-            addNote() {
-                if (this.title && this.content) {
-                    const newNote = { title: this.title, content: this.content }
-                    axios  
-                        .post("https://lola-notes-server.herokuapp.com/notes", newNote)
-                        .then(res => (this.message = "Note added"))
-                        .catch(err => (this.message= "Note failed to add"))
-                        .then(() => this.$root.$emit("reloadResources"))
-                    this.title = ""
-                    this.content = ""
-                } else {
-                    this.message = "Please enter note title & content"
-                }
-            },
+            }
         }
     }
 </script>
@@ -129,7 +96,7 @@
         border: 1px solid black;
         border-radius: 4px;
         cursor: pointer;
-        padding: 5px;
+        padding: 8px;
         width: 70px;
         -webkit-user-select: none;
         -moz-user-select: none; 
@@ -138,9 +105,9 @@
         background: black;
         color: white;
     }
-    #submit {
+    #edit-submit {
         width: 40%;
-        margin: 10px;
+        margin-top: 20px;
         -webkit-user-select: none;
         -moz-user-select: none; 
     }

@@ -1,9 +1,9 @@
 <template>
   <div id="main">
   <div class="nav">
-    <router-link class="link" to="/notes" exact>Notes</router-link>
-    <router-link class="link" to="/register">Register</router-link>
-    <router-link class="link" to="/login">Login</router-link>
+    <router-link class="link" to="/notes" exact>notes</router-link>
+    <router-link class="link" to="/new" exact>new</router-link>
+    <div class="link">logout</div>
   </div>
     <router-view></router-view>
   </div>
@@ -21,7 +21,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: black;
     width: 100%;
     margin: 0;
   }
@@ -35,12 +35,12 @@
     left: 0;
     display: flex;
     justify-content: center;
-    background-color: lavender;
+    background-color: #e9bed3;
   }
 
   .link {
     margin: 0 20px;
-    border: 1px solid lavender;
+    border: 1px solid #e9bed3;
     text-decoration: none;
     color: black;
     background: white;

@@ -2,6 +2,7 @@
 node_modules
 /dist
 config.js
+.netlify
 
 # local env files
 .env.local

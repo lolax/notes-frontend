@@ -43,7 +43,13 @@
                         .auth()
                         .signInWithEmailAndPassword(this.email, this.password)
                         .then(
-                            () => this.$router.push("/notes"),
+                            (user) => {
+                                firebase
+                                    .auth().currentUser
+                                    .getIdToken(true)
+                                    .then(token => localStorage.setItem('token', token))
+                                this.$router.push("/notes")
+                            },
                             (err) => this.message = err.message
                         )
                 } else {

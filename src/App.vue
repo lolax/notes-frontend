@@ -76,13 +76,14 @@
         padding: 10px 15px;
         outline: 0;
         outline-offset: 0;
-        transition: 500ms;
+        transition: 300ms;
+        cursor: pointer;
     }
 
     .link:hover {
         border: 1px solid black;
         outline: 1px solid black;
         outline-offset: 5px;
-        transition: 500ms;
+        transition: 300ms;
     }
 </style>

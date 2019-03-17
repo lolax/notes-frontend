@@ -42,14 +42,16 @@
         },
         mounted() {
             axios
-                .get("https://lola-notes-server.herokuapp.com/notes")
+                // .get("https://lola-notes-server.herokuapp.com/notes", {headers: { Authorization: localStorage.getItem("token") }})
+                .get("http://localhost:3300/restricted/notes", {headers: { Authorization: localStorage.getItem("token") }})
                 .then(res => (this.allNotes = res.data))
                 .catch(err => (this.message = "Notes could not be retrieved"))
                 .then(() => this.filteredNotes = this.allNotes)
 
             this.$root.$on("reloadResources", () => {
                 axios
-                    .get("https://lola-notes-server.herokuapp.com/notes/")
+                    // .get("https://lola-notes-server.herokuapp.com/notes/", {headers: { Authorization: localStorage.getItem("token") }})
+                    .get("http://localhost:3300/restricted/notes/", {headers: { Authorization: localStorage.getItem("token") }})
                     .then(res => (this.allNotes = res.data))
                     .catch(err => (this.message = "Notes could not be refreshed"))
                     .then(() => this.filteredNotes = this.allNotes)
@@ -84,7 +86,7 @@
     }
     .search {
         width: 30%;
-        margin: 15px;
+        margin: 100px 15px 15px;
         padding: 10px;
         font-size: 18px;
     }
@@ -114,7 +116,7 @@
     .message {
         height: 20px;
         font-size: 18px;
-        margin-bottom: 20px;
+        margin: 100px auto 20px;
     }
     hr {
         margin: 10px auto;

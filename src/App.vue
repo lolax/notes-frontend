@@ -27,19 +27,19 @@
             }
         },
         methods: {
-        logout() {
-            firebase
-            .auth()
-            .signOut()
-            .then(
-                () => {
-                    this.$router.push("/")
-                    this.validated = false
-                    localStorage.clear()
-                },
-                () => alert(err.message)
-            )
-        },
+            logout() {
+                firebase
+                .auth()
+                .signOut()
+                .then(
+                    () => {
+                        this.$router.push("/")
+                        this.validated = false
+                        localStorage.clear()
+                    },
+                    () => alert(err.message)
+                )
+            },
         }
     }
 </script>

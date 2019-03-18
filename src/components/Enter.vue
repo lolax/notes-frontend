@@ -53,7 +53,7 @@
                             (err) => this.message = err.message
                         )
                 } else {
-                    this.message = "Please enter a email & password"
+                    this.message = "Please enter an email & password"
                 }
             },
             register() {
@@ -69,7 +69,7 @@
                             (err) => this.message = err.message
                         )
                 } else {
-                    this.message = "Please enter a email & password"
+                    this.message = "Please enter an email & password"
                 }
             }
         }

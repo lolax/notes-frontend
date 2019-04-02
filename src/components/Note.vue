@@ -67,6 +67,7 @@
         border: 0;
         background: white;
         padding: 0;
+        outline: none;
     }
     .note {
         width: 30%;

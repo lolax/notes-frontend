@@ -3,6 +3,7 @@ node_modules
 /dist
 dist
 config.js
+.env
 .netlify
 
 # local env files

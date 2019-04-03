@@ -3,11 +3,22 @@ import firebase from 'firebase/app'
 import VueRouter from 'vue-router'
 import App from './App'
 import router from './router'
-import config from './config'
+// import config from '../config'
 
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
+
+console.log(process.env)
+
+const config = {
+  apiKey: process.env.VUE_APP_apiKey.trim(),
+  authDomain: process.env.VUE_APP_authDomain.trim(),
+  databaseURL: process.env.VUE_APP_databaseURL.trim(),
+  projectId: process.env.VUE_APP_projectId.trim(),
+  storageBucket: process.env.VUE_APP_storageBucket.trim(),
+  messagingSenderId: process.env.VUE_APP_messagingSenderId.trim()
+};
 
 firebase.initializeApp(config)
 

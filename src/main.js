@@ -3,13 +3,10 @@ import firebase from 'firebase/app'
 import VueRouter from 'vue-router'
 import App from './App'
 import router from './router'
-// import config from '../config'
 
 Vue.use(VueRouter)
 
 Vue.config.productionTip = false
-
-console.log(process.env)
 
 const config = {
   apiKey: process.env.VUE_APP_apiKey.trim(),

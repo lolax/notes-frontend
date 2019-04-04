@@ -29,15 +29,13 @@
             const id = this.$route.params.id
             axios
                 .get(`https://lola-notes-server.herokuapp.com/restricted/notes/${id}/`, {headers: { Authorization: localStorage.getItem("token") }})
-                // .get(`http://localhost:3300/restricted/notes/${id}/`, {headers: { Authorization: localStorage.getItem("token") }})
                 .then(res => (this.note = res.data))
-                .catch(err => (this.message = "Note could not be retrieved"))
+                .catch(() => (this.message = "Note could not be retrieved"))
             this.$root.$on("reloadResources", () => {
                 axios
                     .get(`https://lola-notes-server.herokuapp.com/restricted/notes/${id}/`, {headers: { Authorization: localStorage.getItem("token") }})
-                    // .get(`http://localhost:3300/restricted/notes/${id}/`, {headers: { Authorization: localStorage.getItem("token") }})
                     .then(res => (this.note = res.data))
-                    .catch(err => (this.message = "Note could not be refreshed"))
+                    .catch(() => (this.message = "Note could not be refreshed"))
             })
         }
     }

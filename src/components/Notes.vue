@@ -43,17 +43,15 @@
         mounted() {
             axios
                 .get("https://lola-notes-server.herokuapp.com/restricted/notes", {headers: { Authorization: localStorage.getItem("token") }})
-                // .get("http://localhost:3300/restricted/notes", {headers: { Authorization: localStorage.getItem("token") }})
                 .then(res => (this.allNotes = res.data))
-                .catch(err => (this.message = "Notes could not be retrieved"))
+                .catch(() => (this.message = "Notes could not be retrieved"))
                 .then(() => this.filteredNotes = this.allNotes)
 
             this.$root.$on("reloadResources", () => {
                 axios
                     .get("https://lola-notes-server.herokuapp.com/restricted/notes/", {headers: { Authorization: localStorage.getItem("token") }})
-                    // .get("http://localhost:3300/restricted/notes/", {headers: { Authorization: localStorage.getItem("token") }})
                     .then(res => (this.allNotes = res.data))
-                    .catch(err => (this.message = "Notes could not be refreshed"))
+                    .catch(() => (this.message = "Notes could not be refreshed"))
                     .then(() => this.filteredNotes = this.allNotes)
 
             })

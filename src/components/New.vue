@@ -44,9 +44,8 @@
                     const newNote = { title: this.title, content: this.content }
                     axios  
                         .post("https://lola-notes-server.herokuapp.com/restricted/notes", newNote, {headers: { Authorization: localStorage.getItem("token") }})
-                        // .post("http://localhost:3300/restricted/notes", newNote, {headers: { Authorization: localStorage.getItem("token") }})
-                        .then(res => (this.message = "Note added"))
-                        .catch(err => (this.message= "Note failed to add"))
+                        .then(() => (this.message = "Note added"))
+                        .catch(() => (this.message= "Note failed to add"))
                         .then(() => this.$root.$emit("reloadResources"))
                     this.title = ""
                     this.content = ""
